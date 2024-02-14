@@ -3,6 +3,7 @@
 namespace Framework;
 
 use PDO;
+use Exception;
 use PDOException;
 use PDOStatement;
 
