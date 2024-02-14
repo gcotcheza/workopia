@@ -1,5 +1,9 @@
 <?php
 
+use PDO;
+use Exception;
+use PDOStatement;
+
 class Database
 {
     public $conn;
@@ -13,13 +17,27 @@ class Database
 
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ];
 
         try {
-            $this->conn = new PDO($dsn, $config['username'], $config['password']);
+            $this->conn = new PDO($dsn, $config['username'], $config['password'], $options);
         } catch (PDOException $e) {
             throw new Exception("Database connection failed: {$e->getMessage()}");
+        }
+    }
+
+    /**
+     * Query the database
+     */
+    public function query(string $query): PDOStatement
+    {
+        try {
+            $sth = $this->conn->prepare($query);
+            $sth->execute();
+            return $sth;
+        } catch (PDOException $e) {
+            throw new Exception("Query failed to execute: {$e->getMessage()}");
         }
     }
 }
