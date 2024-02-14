@@ -11,11 +11,12 @@ function basePath(string $path = ''): string
 /**
  * Load a view
  */
-function loadView(string $name): void
+function loadView(string $name, array $data = []): void
 {
    $viewPath = basePath("views/{$name}.view.php");
 
    if (file_exists($viewPath)) {
+      extract($data);
       require $viewPath;
    } else {
       echo "View {$name} not found!";
