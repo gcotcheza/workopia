@@ -56,3 +56,11 @@ function inspectAndDie(mixed $value): void
    die(var_dump($value));
    echo '</pre>';
 }
+
+/**
+ * Format salary
+ */
+function formatSalary(string $salary): string
+{
+   return '€ ' . number_format(floatval($salary), 2, ',', '.');
+}
