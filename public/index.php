@@ -1,6 +1,8 @@
 <?php
-require __DIR__ . '/..vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 require '../helpers.php';
+
+use Framework\Router;
 
 // spl_autoload_register(function ($class) {
 //     $path = basePath('Framework/' . $class . '.php');
