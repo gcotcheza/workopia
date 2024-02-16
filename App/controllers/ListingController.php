@@ -21,7 +21,7 @@ class ListingController
     {
         $listings = $this->db->query('SELECT * FROM listings')->fetchAll();
 
-        loadView('home', [
+        loadView('listings/index', [
             'listings' => $listings,
         ]);
     }
@@ -37,15 +37,21 @@ class ListingController
     /**
      * Show a specific resource.
      */
-    public function show(): void
+    public function show($params): void
     {
-        $id = $_GET['id'] ?? '';
+        $id = $params['id'] ?? '';
 
         $params = [
             'id' => $id
         ];
 
         $listing = $this->db->query('SELECT * FROM listings where id = :id', $params)->fetch();
+
+        // Check if resource exist.
+        if (!$listing) {
+            ErrorController::notFound('Job listing not found');
+            return;
+        }
 
         loadView('listings/show', [
             'listing' => $listing,
