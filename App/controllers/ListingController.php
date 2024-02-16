@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Framework\Database;
+use Framework\Validation;
 
 class ListingController
 {
@@ -15,7 +16,7 @@ class ListingController
     }
 
     /**
-     * Show aall the listings.
+     * Show all the listings.
      */
     public function index(): void
     {

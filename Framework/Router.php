@@ -85,8 +85,6 @@ class Router
             if (count($uriSegments) === count($routeSegments) && strtoupper($route['method'] === $requestMethod)) {
                 $params = [];
 
-                $match = true;
-
                 for ($i = 0; $i < count($uriSegments); $i++) {
                     // If the uri's do not match and there is no param.
                     if ($routeSegments[$i] !== $uriSegments[$i] && !preg_match('/\{(.+?)\}/', $routeSegments[$i])) {
