@@ -15,9 +15,9 @@ class ListingController
     }
 
     /**
-     * Show the index page.
+     * Show aall the listings.
      */
-    public function index()
+    public function index(): void
     {
         $listings = $this->db->query('SELECT * FROM listings')->fetchAll();
 
@@ -29,7 +29,7 @@ class ListingController
     /**
      * Shows the form to create a resource.
      */
-    public function create()
+    public function create(): void
     {
         loadView('listings/create');
     }
@@ -37,7 +37,7 @@ class ListingController
     /**
      * Show a specific resource.
      */
-    public function show()
+    public function show(): void
     {
         $id = $_GET['id'] ?? '';
 
