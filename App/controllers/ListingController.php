@@ -38,7 +38,7 @@ class ListingController
     /**
      * Show a specific resource.
      */
-    public function show($params): void
+    public function show(array $params): void
     {
         $id = $params['id'] ?? '';
 
@@ -131,5 +131,26 @@ class ListingController
 
             redirect('/listings');
         }
+    }
+
+    /**
+     * Delete a resource.
+     */
+    public function destroy(array $params)
+    {
+        $id = $params['id'];
+
+        $params = [
+            'id' => $id
+        ];
+
+        $listing = $this->db->query('SELECT * FROM listings where id = :id', $params)->fetch();
+        if (!$listing) {
+            ErrorController::notFound('Listing not found');
+            return;
+        }
+        $this->db->query('DELETE FROM listings WHERE id = :id', $params);
+
+        redirect('/listings');
     }
 }
