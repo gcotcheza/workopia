@@ -83,8 +83,31 @@ class ListingController
         // Will be replace later using sessions.
         $newListingData['user_id'] = 1;
 
-        $sanitizedData = array_map('sanitize', $newListingData);
+        $newListingData = array_map('sanitize', $newListingData);
 
-        inspectAndDie($newListingData);
+        $requiredFields = [
+            'title',
+            'description',
+            'email',
+            'city',
+        ];
+
+        $erros = [];
+
+        foreach ($requiredFields as $field) {
+            if (empty($newListingData[$field]) || !Validation::string($newListingData[$field])) {
+                $errors[$field] = ucfirst($field) . ' is required.';
+            }
+        }
+        if (!empty($errors)) {
+            // Reload view with error
+            loadView('listings/create', [
+                'errors' => $errors,
+                'listing' => $newListingData,
+            ]);
+        } else {
+            // submit data
+            echo 'success';
+        }
     }
 }
