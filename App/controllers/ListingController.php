@@ -94,7 +94,7 @@ class ListingController
             'city',
         ];
 
-        $erros = [];
+        $errors = [];
 
         foreach ($requiredFields as $field) {
             if (empty($newListingData[$field]) || !Validation::string($newListingData[$field])) {
@@ -150,6 +150,9 @@ class ListingController
             return;
         }
         $this->db->query('DELETE FROM listings WHERE id = :id', $params);
+
+        // Set flash message
+        $_SESSION['success_message'] = 'Listing deleted successfully.';
 
         redirect('/listings');
     }
