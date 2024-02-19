@@ -70,6 +70,7 @@ class ListingController
             'salary',
             'requirements',
             'benefits',
+            'tags',
             'company',
             'address',
             'city',
@@ -88,6 +89,7 @@ class ListingController
         $requiredFields = [
             'title',
             'description',
+            'salary',
             'email',
             'city',
         ];
@@ -107,7 +109,27 @@ class ListingController
             ]);
         } else {
             // submit data
-            echo 'success';
+            $fields = [];
+            foreach ($newListingData as $field => $value) {
+                $fields[] = $field;
+            }
+            $fields = implode(', ', $fields);
+
+            $values = [];
+            foreach ($newListingData as $field => $value) {
+                // Convert emtpy strings to Null
+                if ($value === '') {
+                    $newListingData[$field] = null;
+                }
+                $values[] = ':' . $field;
+            }
+            $values = implode(', ', $values);
+
+            $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
+
+            $this->db->query($query, $newListingData);
+
+            redirect('/listings');
         }
     }
 }

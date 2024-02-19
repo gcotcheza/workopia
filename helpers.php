@@ -72,3 +72,12 @@ function sanitize(string $dirty): string
 {
    return filter_var(trim($dirty), FILTER_SANITIZE_SPECIAL_CHARS);
 }
+
+/**
+ * Redirect to a given url
+ */
+function redirect($url)
+{
+   header("Location: {$url}");
+   exit;
+}
