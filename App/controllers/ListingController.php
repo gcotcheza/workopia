@@ -156,4 +156,28 @@ class ListingController
 
         redirect('/listings');
     }
+
+    /**
+     * Show the edit form.
+     */
+    public function edit(array $params): void
+    {
+        $id = $params['id'] ?? '';
+
+        $params = [
+            'id' => $id
+        ];
+
+        $listing = $this->db->query('SELECT * FROM listings where id = :id', $params)->fetch();
+
+        // Check if resource exist.
+        if (!$listing) {
+            ErrorController::notFound('Job listing not found');
+            return;
+        }
+        
+        loadView('listings/edit', [
+            'listing' => $listing,
+        ]);
+    }
 }
