@@ -58,4 +58,33 @@ class ListingController
             'listing' => $listing,
         ]);
     }
+
+    /**
+     * Store a newly created resource in the database.
+     */
+    public function store(): void
+    {
+        $allowedFields = [
+            'title',
+            'description',
+            'salary',
+            'requirements',
+            'benefits',
+            'company',
+            'address',
+            'city',
+            'state',
+            'phone',
+            'email',
+        ];
+
+        $newListingData = array_intersect_key($_POST, array_flip($allowedFields));
+
+        // Will be replace later using sessions.
+        $newListingData['user_id'] = 1;
+
+        $sanitizedData = array_map('sanitize', $newListingData);
+
+        inspectAndDie($newListingData);
+    }
 }

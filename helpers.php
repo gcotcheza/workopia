@@ -64,3 +64,11 @@ function formatSalary(string $salary): string
 {
    return '€ ' . number_format(floatval($salary), 2, ',', '.');
 }
+
+/** 
+ * Sanitize data.
+ */
+function sanitize(string $dirty): string
+{
+   return filter_var(trim($dirty), FILTER_SANITIZE_SPECIAL_CHARS);
+}
