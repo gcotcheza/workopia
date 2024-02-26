@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use Framework\Database;
+use Framework\Session;
 use Framework\Validation;
+use Framework\Authorization;
 
 class ListingController
 {
@@ -20,7 +22,7 @@ class ListingController
      */
     public function index(): void
     {
-        $listings = $this->db->query('SELECT * FROM listings')->fetchAll();
+        $listings = $this->db->query('SELECT * FROM listings ORDER BY created_at DESC')->fetchAll();
 
         loadView('listings/index', [
             'listings' => $listings,
@@ -82,7 +84,7 @@ class ListingController
         $newListingData = array_intersect_key($_POST, array_flip($allowedFields));
 
         // Will be replace later using sessions.
-        $newListingData['user_id'] = 1;
+        $newListingData['user_id'] = Session::get('user')['id'];
 
         $newListingData = array_map('sanitize', $newListingData);
 
@@ -144,11 +146,19 @@ class ListingController
             'id' => $id
         ];
 
-        $listing = $this->db->query('SELECT * FROM listings where id = :id', $params)->fetch();
+        $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $params)->fetch();
+
         if (!$listing) {
             ErrorController::notFound('Listing not found');
             return;
         }
+
+        // Authorization
+        if (Session::get('user')['id'] !== $listing->user_id) {
+            $_SESSION['error_message'] = 'You are not authorized to delete this listing';
+            return redirect('/listings/' . $listing->id);
+        }
+
         $this->db->query('DELETE FROM listings WHERE id = :id', $params);
 
         // Set flash message
