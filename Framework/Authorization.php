@@ -9,7 +9,7 @@ class Authorization {
     /**
      * Check if current logged in user owns a resource.
      */
-    public static function isOwner($userId) 
+    public static function isOwner($userId): bool
     {
         $sessionUser = Session::get('user');
 

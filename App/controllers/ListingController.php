@@ -188,6 +188,13 @@ class ListingController
             return;
         }
 
+        // Authorization
+        if (!Authorization::isOwner($listing->user_id)) {
+            Session::setFlashMessage('error_message', 'You are not authorized to delete this listing.');
+            redirect('/listings/' . $listing->id);
+            return;
+        }
+
         loadView('listings/edit', [
             'listing' => $listing,
         ]);
@@ -196,7 +203,7 @@ class ListingController
     /**
      * Update a resource.
      */
-    public function update(array $params)
+    public function update(array $params): void
     {
         $id = $params['id'] ?? '';
 
@@ -209,6 +216,12 @@ class ListingController
         // Check if resource exist.
         if (!$listing) {
             ErrorController::notFound('Job listing not found');
+            return;
+        }
+        // Authorization
+        if (!Authorization::isOwner($listing->user_id)) {
+            Session::setFlashMessage('error_message', 'You are not authorized to update this listing.');
+            redirect('/listings/' . $listing->id);
             return;
         }
 
