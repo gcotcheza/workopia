@@ -154,7 +154,7 @@ class ListingController
         }
 
         // Authorization
-        if (Session::get('user')['id'] !== $listing->user_id) {
+        if (!Authorization::isOwner($listing->user_id)) {
             $_SESSION['error_message'] = 'You are not authorized to delete this listing';
             return redirect('/listings/' . $listing->id);
         }
