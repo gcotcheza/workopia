@@ -2,20 +2,23 @@
 <?php LoadPartial('navbar') ?>
 <?php LoadPartial('top-banner') ?>
 
-<?php ?>
-
 <section>
     <div class="container mx-auto p-4 mt-4">
         <div class="text-center text-3xl mb-4 font-bold border border-gray-300 p-3">
-            <?php if (!empty($keywords) && !empty($location)) : ?>
-                Search result for: <?= htmlspecialchars($keywords) . ' and ' .  htmlspecialchars($location) ?>
-            <?php elseif (!empty($keywords)) : ?>
-                Search result for: <?= htmlspecialchars($keywords) ?>
-            <?php elseif (!empty($location)) : ?>
-                Search result for: <?= htmlspecialchars($location) ?>
-            <?php else : ?>
-                All Jobs
-            <?php endif; ?>
+            <?php
+            $searchResultText = 'All Jobs';
+            if (!empty($keywords) || !empty($location)) {
+                $parts = [];
+                if (!empty($keywords)) {
+                    $parts[] = htmlspecialchars($keywords);
+                }
+                if (!empty($location)) {
+                    $parts[] = htmlspecialchars($location);
+                }
+                $searchResultText = 'Search result for: ' . implode(' and ', $parts);
+            }
+            echo $searchResultText;
+            ?>
         </div>
         <?= loadPartial('message') ?>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
