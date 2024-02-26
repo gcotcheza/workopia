@@ -31,4 +31,5 @@ This project was developed following the "PHP from Scratch 2024 | Beginners to A
 
 ## Acknowledgements
 
-Thanks to Brad Traversy, the creator and instructor of this Udemy course PHP From Scratch 2024| Beginners to Advanced, for the comprehensive and engaging content.
+- Thanks to [Brad Traversy](https://github.com/bradtraversy), the creator and instructor of this Udemy course [PHP From Scratch 2024 | Beginners to Advanced](https://www.udemy.com/course/php-from-scratch-course/?kw=php&src=sac) for the comprehensive and engaging content.
+
