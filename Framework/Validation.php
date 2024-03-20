@@ -4,14 +4,13 @@ namespace Framework;
 
 class Validation
 {
-
     /**
      * Validate a string
      */
     public static function string(string $value, int $min = 1, int $max = PHP_INT_MAX): bool
     {
         if (is_string($value)) {
-            $value = trim($value);
+            $value  = trim($value);
             $length = strlen($value);
             return $length >= $min && $length <= $max;
         }

@@ -1,6 +1,7 @@
 <?php
 
 use Framework\Session;
+
 ?>
 <header class="bg-blue-900 text-white p-4">
   <div class="container mx-auto flex justify-between items-center">

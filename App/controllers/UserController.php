@@ -6,19 +6,20 @@ use Framework\Database;
 use Framework\Validation;
 use Framework\Session;
 
-class UserController {
+class UserController
+{
     protected $db;
 
     public function __construct()
     {
-        $config = require basePath('config/db.php');
+        $config   = require basePath('config/db.php');
         $this->db = new Database($config);
     }
 
     /**
      * Show login page
      */
-    public function login(): void 
+    public function login(): void
     {
         loadView('users/login');
     }
@@ -36,11 +37,11 @@ class UserController {
      */
     public function store(): void
     {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $city = $_POST['city'];
-        $state = $_POST['state'];
-        $password = $_POST['password'];
+        $name                 = $_POST['name'];
+        $email                = $_POST['email'];
+        $city                 = $_POST['city'];
+        $state                = $_POST['state'];
+        $password             = $_POST['password'];
         $passwordConfirmation = $_POST['password_confirmation'];
 
         $errors = [];
@@ -65,15 +66,15 @@ class UserController {
         if(!empty($errors)) {
             loadView('users/create', [
                 'errors' => $errors,
-                'user' => [
-                    'name' => $name,
+                'user'   => [
+                    'name'  => $name,
                     'email' => $email,
-                    'city' => $city,
+                    'city'  => $city,
                     'state' => $state,
                 ],
             ]);
             exit;
-        } 
+        }
         // Check if email already exist in the database.
         $params = [
             'email' => $email,
@@ -91,10 +92,10 @@ class UserController {
 
         // Create user account
         $params = [
-            'name' => $name,
-            'email' => $email,
-            'city' => $city,
-            'state' => $state,
+            'name'     => $name,
+            'email'    => $email,
+            'city'     => $city,
+            'state'    => $state,
             'password' => password_hash($password, PASSWORD_DEFAULT),
         ];
 
@@ -105,13 +106,13 @@ class UserController {
 
         // Set user session
         Session::set('user', [
-            'id' => $userId,
-            'name' => $name,
+            'id'    => $userId,
+            'name'  => $name,
             'email' => $email,
-            'city' => $city,
+            'city'  => $city,
             'state' => $state,
         ]);
-        
+
         redirect('/');
     }
 
@@ -133,7 +134,7 @@ class UserController {
      */
     public function authenticate(): void
     {
-        $email = $_POST['email'];
+        $email    = $_POST['email'];
         $password = $_POST['password'];
 
         $errors = [];
@@ -180,10 +181,10 @@ class UserController {
         }
         // Set user session
         Session::set('user', [
-            'id' => $user->id,
-            'name' => $user->name,
+            'id'    => $user->id,
+            'name'  => $user->name,
             'email' => $user->email,
-            'city' => $user->city,
+            'city'  => $user->city,
             'state' => $user->state,
         ]);
 

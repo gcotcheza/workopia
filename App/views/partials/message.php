@@ -1,6 +1,7 @@
 <?php
 
 use Framework\Session;
+
 ?>
 <?php $successMessage = Session::getFlashMessage('success_message'); ?>
 <?php if ($successMessage !== null) : ?>

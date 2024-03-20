@@ -4,8 +4,8 @@ namespace Framework\Middleware;
 
 use Framework\Session;
 
-class Authorize {
-
+class Authorize
+{
     /**
      * Check if user is authenticated.
      */
@@ -17,10 +17,10 @@ class Authorize {
     /**
      * Handle the user's request.
      */
-    public function handle(string $role) 
+    public function handle(string $role)
     {
         if ($role === 'guest' && $this->isAuthenticated()) {
-            return redirect('/'); 
+            return redirect('/');
         } elseif ($role === 'auth' && !$this->isAuthenticated()) {
             return redirect('/auth/login');
         }

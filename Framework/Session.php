@@ -2,17 +2,17 @@
 
 namespace Framework;
 
-class Session {
-
+class Session
+{
     /**
      * Start session
      */
-    public static function start() 
+    public static function start()
     {
         if(session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-    } 
+    }
 
     /**
      * Set a session key value pair.

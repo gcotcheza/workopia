@@ -13,7 +13,7 @@ class ListingController
 
     public function __construct()
     {
-        $config = require basePath('config/db.php');
+        $config   = require basePath('config/db.php');
         $this->db = new Database($config);
     }
 
@@ -106,7 +106,7 @@ class ListingController
         if (!empty($errors)) {
             // Reload view with error
             loadView('listings/create', [
-                'errors' => $errors,
+                'errors'  => $errors,
                 'listing' => $newListingData,
             ]);
         } else {
@@ -244,7 +244,7 @@ class ListingController
 
         $updateValues = array_intersect_key($_POST, array_flip($allowedFields));
 
-        $updateValues = array_map('sanitize',$updateValues);
+        $updateValues = array_map('sanitize', $updateValues);
 
         $requiredFields = [
             'title',
@@ -265,20 +265,20 @@ class ListingController
         if(!empty($errors)) {
             loadView('listings/edit', [
                 'listing' => $listing,
-                'errors' => $errors,
+                'errors'  => $errors,
             ]);
             exit;
         } else {
             // Update the resource in the database.
             $updateFields = [];
             foreach(array_keys($updateValues) as $field) {
-               $updateFields[] = "{$field} = :{$field}";
+                $updateFields[] = "{$field} = :{$field}";
             }
             $updateFields = implode(', ', $updateFields);
-            $updateQuery = "UPDATE listings SET $updateFields WHERE id = :id";
+            $updateQuery  = "UPDATE listings SET $updateFields WHERE id = :id";
 
             $updateValues['id'] = $id;
-            
+
             $this->db->query($updateQuery, $updateValues);
 
             Session::setFlashMessage('success_message', 'Listing updated successfully.');
@@ -294,7 +294,7 @@ class ListingController
     {
         $keywords = isset($_GET['keywords']) ? trim($_GET['keywords']) : '';
         $location = isset($_GET['location']) ? trim($_GET['location']) : '';
-        $query = "SELECT * FROM listings
+        $query    = "SELECT * FROM listings
             WHERE (title LIKE :keywords 
             OR description LIKE :keywords 
             OR tags LIKE :keywords 
@@ -309,8 +309,8 @@ class ListingController
             'location' => "%{$location}%",
           ];
 
-         $listings = $this->db->query($query, $params)->fetchAll();
-          
+        $listings = $this->db->query($query, $params)->fetchAll();
+
         loadView('/listings/index', [
             'listings' => $listings,
             'keywords' => $keywords,

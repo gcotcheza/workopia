@@ -4,7 +4,6 @@ namespace Framework;
 
 use App\Controllers\ErrorController;
 use Framework\Middleware\Authorize;
-use ErrorException;
 
 class Router
 {
@@ -18,11 +17,11 @@ class Router
         list($controller, $controllerMethod) = explode('@', $action);
 
         $this->routes[] = [
-            'method' => $method,
-            'uri' => $uri,
-            'controller' => $controller,
+            'method'           => $method,
+            'uri'              => $uri,
+            'controller'       => $controller,
             'controllerMethod' => $controllerMethod,
-            'middleware' => $middleware,
+            'middleware'       => $middleware,
         ];
     }
 
@@ -113,7 +112,7 @@ class Router
                     }
 
                     // Extract controller and controller method
-                    $controller = 'App\\Controllers\\' . $route['controller'];
+                    $controller       = 'App\\Controllers\\' . $route['controller'];
                     $controllerMethod =  $route['controllerMethod'];
 
                     // Instantiate the controller and call the method

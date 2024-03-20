@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Get the base path 
+ * Get the base path.
  */
 function basePath(string $path = ''): string
 {
@@ -9,7 +9,7 @@ function basePath(string $path = ''): string
 }
 
 /**
- * Load a view
+ * Load a view.
  */
 function loadView(string $name, array $data = []): void
 {
@@ -24,11 +24,10 @@ function loadView(string $name, array $data = []): void
 }
 
 /**
- * Load a partial
+ * Load a partial.
  */
 function loadPartial(string $name,  array $data =[]): void
 {
-
    $prtialPath = basePath("App/views/partials/{$name}.php");
 
    if (file_exists($prtialPath)) {
@@ -40,7 +39,7 @@ function loadPartial(string $name,  array $data =[]): void
 }
 
 /**
- * Inspect a value(s)
+ * Inspect a value(s).
  */
 function inspect(mixed $value): void
 {
@@ -50,7 +49,7 @@ function inspect(mixed $value): void
 }
 
 /**
- * Inspect a value(s) and die
+ * Inspect a value(s) and die.
  */
 function inspectAndDie(mixed $value): void
 {
@@ -60,7 +59,7 @@ function inspectAndDie(mixed $value): void
 }
 
 /**
- * Format salary
+ * Format salary.
  */
 function formatSalary(string $salary): string
 {
@@ -76,7 +75,7 @@ function sanitize(string $dirty): string
 }
 
 /**
- * Redirect to a given url
+ * Redirect to a given url.
  */
 function redirect($url)
 {

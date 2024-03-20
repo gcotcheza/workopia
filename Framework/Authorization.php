@@ -2,10 +2,8 @@
 
 namespace Framework;
 
-use Framework\Session;
-
-class Authorization {
-
+class Authorization
+{
     /**
      * Check if current logged in user owns a resource.
      */
