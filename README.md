@@ -1,5 +1,5 @@
 
-# Workopia Project Overview
+# Workopia - Job Listing Project
 
 ## About the Project
 This project was developed following the [PHP From Scratch 2024 | Beginners to Advanced](https://www.udemy.com/course/php-from-scratch-course/?kw=php&src=sac) course, emphasizing the fundamentals of vanilla PHP in building a CRUD application in a framework-like manner without using any frameworks or libraries. The project is an exploration into architecting a web application following best practices in software development, structured to mimic the design patterns seen in popular PHP frameworks, such as Laravel, but all from scratch.
