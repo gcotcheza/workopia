@@ -12,7 +12,7 @@ class Database
     public $conn;
 
     /**
-     * Constructor for Database class
+     * Constructor for Database class.
      */
     public function __construct(array $config)
     {
@@ -31,7 +31,7 @@ class Database
     }
 
     /**
-     * Query the database
+     * Query the database.
      */
     public function query(string $query, array $params = []): PDOStatement
     {
